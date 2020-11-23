@@ -6,6 +6,7 @@ import aiohttp_jinja2
 from aiohttp import web
 from msrestazure.azure_active_directory import AADTokenCredentials
 from aiohttp_session import get_session
+import pyodbc
 
 def get_app_config_data_from_key_vault():
     msi_endpoint = os.environ.get("MSI_ENDPOINT")
