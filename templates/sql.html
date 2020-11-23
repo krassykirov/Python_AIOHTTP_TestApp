@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div align="center">
+    <div class="row">
+         <div class="col-md-4">
+         <div class="alert alert-success" role="alert">
+         <p>Fetching some test users data from Azure SQL</p>
+                <table>
+            {% for user in users %}
+               <tr>
+                   <th> {{ user }} </th>
+               </tr>
+            {% endfor %}
+            </table>
+         </div>
+        </div>
+     <div class="col-md-4">
+     <h4>Azure SQL</h4>
+     <p>Use Python to query a database using pyodbc</p>
+     <p><a class="btn btn-info" href="https://docs.microsoft.com/en-us/azure/azure-sql/database/connect-query-python?tabs=windows" target="_blank"> Learn more &raquo;</a></p>
+      <h4>Asyncpg PostgreSQL</h4>
+      <p>Asyncpg is fast PostgreSQL Database Client Library designed specifically for PostgreSQL and Python/asyncio </p>
+      <p><a class="btn btn-info" href="https://github.com/MagicStack/asyncpg" target="_blank">Learn more &raquo;</a></p>
+     </div>
+     </div>
+ {% if error %}
+     <pre style="color: red">Warning: {{error}}</pre>
+  {% endif %}
+</div>
+
+{% endblock %}

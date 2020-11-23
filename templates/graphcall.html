@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+      <div class="col-md-4">
+        <p>Hello {{email}}, you have been authenticated with ADAL </p>
+        <p>Token expiration: {{ token_exp }}, Time now: {{time}} </p>
+        <p>id_token_decoded:</p>
+        <table>
+            {% for k,v in id_token_decoded.items() %}
+               <tr>
+                   <th> {{ k }}:</th>
+                   <th> {{ v }} </th>
+               </tr>
+            {% endfor %}
+         </table>
+        <img src="/static/images/authworkflow.png" alt="Microsoft Graph" width=550 height=400/>
+     </div>
+</div>
+
+{% endblock %}
+

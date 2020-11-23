@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    {% if registred_user %}
+       <pre style="color: blue">{{registred_user}} </pre>
+    {% endif %}
+    {% if reg_error %}
+           <pre style="color: red">Warning: {{reg_error}}</pre>
+    {% endif %}
+<div class="container" align="center">
+  <h3>Login</h3>
+       {% if user %}
+       <pre style="color: blue">{{user}} have been logged in! </pre>
+        {% endif %}
+
+        {% if error or error_text%}
+              <p>error_text{{error_text}}</p>
+               <pre style="color: red">Warning: {{error}}</pre>
+        {% endif %}
+
+     {% if not username %}
+  <form action="/auth" method="POST">
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" class="form-control" placeholder="Enter Username" name="email" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" placeholder="Enter your Password" name="plain_pass" required>
+    </div>
+     <button type="submit" class="btn btn-info">Sign In</button>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Sign Up
+  </a>
+  </form>
+ </div>
+
+<div class="collapse" id="collapseExample" align="center">
+  <div class="card card-body">
+   <div class="container">
+ <form action="/register" method="POST" class="register">
+    <div class="form-group">
+      <label for="firstname">First name:</label>
+      <input type="text" class="form-control" id="firstname" placeholder="First Name,letters 2-10"
+             name="firstname" pattern="[A-Za-z]{2,10}" required >
+    </div>
+       <div class="form-group">
+      <label for="lastname">Last name:</label>
+      <input type="text" class="form-control" id="lastname" placeholder="Last Name,letters 2-10"
+              name="lastname" pattern="[A-Za-z]{2,10}" required>
+    </div>
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" class="form-control" placeholder="Email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" placeholder="Password" name="plain_pass" required>
+    </div>
+     <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+ </div>
+  </div>
+</div>
+
+     {% else %}
+     {% endif %}
+{% endblock %}

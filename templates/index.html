@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<h5>This is a demo site for testing purposes</h5>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+            <h4>Authenticate and authorize Python apps on Azure</h4>
+           <p>Most cloud applications deployed to Azure need to access other Azure resources such as storage, databases, stored secrets, and so on. To access those resources, the application must be both authenticated and authorized</p>
+           <p><a class="btn btn-info" href="https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-authenticate?tabs=cmd" target="_blank">Learn more  &raquo;</a></p>
+    </div>
+        <div class="col-md-4">
+        <h4>Azure Identity library for Python</h4>
+        <p>The Azure Identity library provides a set of credential classes for use with Azure SDK clients which support Azure Active Directory (AAD) token authentication</p>
+        <p><a class="btn btn-info" href=" https://docs.microsoft.com/en-us/python/api/overview/azure/identity-readme?view=azure-python" target="_blank">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h4>AIOHTTP</h4>
+        <p> Asynchronous HTTP client/server framework for asyncio and Python</p>
+        <p> This Demo site is using Python AIOHTTP</p>
+        <p><a class="btn btn-info"href="https://docs.aiohttp.org/en/stable/" target="_blank">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h4>Asyncpg</h4>
+        <p>Asyncpg is fast PostgreSQL Database Client Library designed specifically for PostgreSQL and Python/asyncio </p>
+        <p><a class="btn btn-info" href="https://github.com/MagicStack/asyncpg" target="_blank">Learn more &raquo;</a></p>
+    </div>
+
+
+
+</div>
+
+{% endblock %}

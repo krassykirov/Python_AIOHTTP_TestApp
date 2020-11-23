@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="container" align="center" style="width:650px">
+    <h5>Basic Example of using Azure Function</h5>
+    <p>This form will trigger an Azure Http-triggered Function that will send a message back.</p>
+      <hr>
+    <div id="output"></div>
+    <form id="submitMessage">
+      <div class="form-group">
+        <input type="text" id="name" class="form-control" placeholder="Your first name">
+      </div>
+      <input type="submit" class="btn btn-secondary" value="Submit">
+    </form>
+   </div>
+<div class="row" align="center">
+    <div class="col-md-4">
+    <p>Learn more about Azure Functions <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-python" target="_blank">here</a></p>
+    <p>Thanks to <a href="https://mikepfeiffer.io/blog/azure-serverless-101" target="_blank"> this </a>blog</p>
+  </div>
+</div>
+
+  <script>
+    document.getElementById('submitMessage').addEventListener('submit', submitMessage);
+    function processResponse(response) {
+      if (response.status === 200) {
+        output =
+          `
+        <div class="alert alert-success" role="alert">
+          Thanks, ${document.getElementById('name').value}! We'll be in touch soon! Http trigger function processed the message
+        </div>
+        `;
+        document.getElementById('output').innerHTML = output;
+      } else {
+        output =
+          `
+        <div class="alert alert-danger" role="alert">
+          Oh no! Something went wrong :(
+        </div>
+        `;
+        document.getElementById('output').innerHTML = output;
+      }
+    }
+    function submitMessage(e) {
+      e.preventDefault();
+      let name = document.getElementById('name').value;
+      fetch('https://jssendemail.azurewebsites.net/api/HttpTrigger1', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          body: JSON.stringify({
+            name: name
+          })
+        })
+        .then((res) => processResponse(res))
+    }
+  </script>
+{% endblock %}

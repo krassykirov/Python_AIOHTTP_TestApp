@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<br/>
+<div class="owl-slider">
+  <div class="owl-carousel owl-theme">
+    <div class="item" style="width:400px"><img src="/static/images/huston404.jpg"></div>
+    <div class="item" style="width:400px"><img src="/static/images/sea.jpg"></div>
+    <div class="item" style="width:400px"><img src="/static/images/Tranquility.jpg"></div>
+    <div class="item" style="width:400px"><img src="/static/images/ice-iceland-lake.jpg"></div>
+     <div class="item" style="width:400px"><img src="/static/images/unnamed.jpg"></div>
+     <div class="item" style="width:400px"><img src="/static/images/mountains.jpg"></div>
+      <div class="item" style="width:400px"><img src="/static/images/new_zealand.jpg"></div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
+<script type="text/javascript">
+$('.owl-carousel').owlCarousel({
+   loop:true,
+   margin:10,
+   nav:true,
+   autoplay:true,
+   autoplayTimeout:1500,
+   autoplayHoverPause:true,
+   autoWidth:true,
+   lazyLoad: true,
+   rewind: true,
+   smartSpeed: 800,
+   stopOnHover : true,
+   responsive: {
+    0: {
+        items: 1
+        },
+    1000: {
+        items: 3
+    },
+    1110: {
+           items: 3
+          }
+  }
+ });
+
+$('.play').on('click',function(){
+    owl.trigger('autoplay.play.owl',[1000])
+})
+$('.stop').on('click',function(){
+owl.trigger('autoplay.stop.owl')
+})
+
+</script>
+
+{% endblock %}
