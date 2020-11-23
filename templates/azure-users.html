@@ -2,13 +2,10 @@
 {% block content %}
 
 <div class="row">
-         <div class="col-md-4">
+       <div class="col-md-4">
         <h4>Microsoft Graph</h4>
-       <div class="alert alert-success" role="alert">
-        <p>Fetching few users from Azure Active Directory using Microsoft Graph</p>
-        <p> Azure AD Graph API reference </p>
-           <p><a class="btn btn-info" href="https://docs.microsoft.com/en-us/previous-versions/azure/ad/graph/api/api-catalog" target="_blank">Learn more  &raquo;</a></p>
-    </div>
+            <p>Fetching few users from Azure Active Directory using Microsoft Graph</p>
+      </div>
             <table>
             {% for user in users %}
                <tr>
@@ -18,7 +15,6 @@
             </table>
        </div>
             <img src="/static/images/microsoft_graph.png" alt="Microsoft Graph" width=400 height=195/>
-        </div>
     <div class="col-md-4">
          <h4>Python authentication for Microsoft Graph</h4>
             <p>The sample shows how to use the Microsoft Azure Active Directory Authentication Library (ADAL) for Python for authentication to Microsoft Graph</p>
@@ -29,6 +25,12 @@
         <p> Find some Microsoft Graph and Python code samples </p>
         <p><a href="https://developer.microsoft.com/en-us/graph/get-started/python" class="btn btn-info" target="_blank">Learn more &raquo;</a></p>
       </div>
+
+        <div>
+        <div class="col-md-4">
+         <h4> Azure AD Graph API reference </h4>
+         <p><a class="btn btn-info" href="https://docs.microsoft.com/en-us/previous-versions/azure/ad/graph/api/api-catalog" target="_blank">Learn more  &raquo;</a></p>
+        </div>
 
 </div>
 
