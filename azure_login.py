@@ -32,8 +32,8 @@ async def db_connect():
     con = pyodbc.connect(conn_str)
     return con
 
-CLIENT_ID = data['CLIENT_ID']  # os.getenv('CLIENT_ID')
-CLIENT_SECRET = data['CLIENT_SECRET']   # os.getenv('CLIENT_SECRET')
+CLIENT_ID = data['CLIENT_ID']
+CLIENT_SECRET = data['CLIENT_SECRET']
 REDIRECT_URI = data['REDIRECT_URI']
 TENANT = data['TENANT']
 AUTHORITY_URL = 'https://login.microsoftonline.com/common'
