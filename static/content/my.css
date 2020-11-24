@@ -7,7 +7,7 @@
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
-    color: #555;
+    color: #87CEFA;
     text-decoration: none;
 }
 .navbar .navbar-brand {
@@ -15,7 +15,7 @@
 }
 /* Change navbar styling on scroll */
 .navbar.active {
-    background: #555;
+    background: #87CEFA;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
 .navbar.active .nav-link {
