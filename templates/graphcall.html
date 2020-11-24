@@ -4,6 +4,7 @@
 <div class="row">
       <div class="col-md-4">
           <div class="alert alert-success" role="alert">
+              <div>
         <p>Hello {{email}}, you have been authenticated with ADAL </p>
         <p>Token expiration: {{ token_exp }}, Time now: {{time}} </p>
         <p>id_token_decoded:</p>
@@ -15,6 +16,7 @@
                </tr>
             {% endfor %}
          </table>
+                  </div>
          </div>
         <img src="/static/images/authworkflow.png" alt="Microsoft Graph" width=550 height=400/>
 
