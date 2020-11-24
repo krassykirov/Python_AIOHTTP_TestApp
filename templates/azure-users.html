@@ -1,23 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-4">
-        <h4>Microsoft Graph</h4>
-            <p>Fetching few users from Azure Active Directory using Microsoft Graph</p>
-        <div class="alert alert-success" role="alert">
-            <table>
-            {% for user in users %}
-               <tr>
-                   <th> UserPrincipalName: {{ user['userPrincipalName'] }} </th>
-               </tr>
-            {% endfor %}
-            </table>
-       </div>
-    </div>
+<div class="alert alert-success" role="alert">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Microsoft Graph</h4>
+                <p>Fetching few users from Azure Active Directory using Microsoft Graph</p>
 
+                <table>
+                {% for user in users %}
+                   <tr>
+                       <th> UserPrincipalName: {{ user['userPrincipalName'] }} </th>
+                   </tr>
+                {% endfor %}
+                </table>
+           </div>
+        </div>
 </div>
-
     <div class="col-md-4">
          <h4>Python authentication for Microsoft Graph</h4>
             <p>The sample shows how to use the Microsoft Azure Active Directory Authentication Library (ADAL) for Python for authentication to Microsoft Graph</p>
