@@ -76,7 +76,6 @@ async def validate_login_form(request):
         except Exception as error:
             return aiohttp_jinja2.render_template("login.html", request, context={'error': error})
 
-
 @aiohttp_jinja2.template('sql.html')
 async def list_users(request):
     con = await db_connect()

@@ -28,8 +28,14 @@ def get_app_config_data_from_key_vault():
 conn_str,data = get_app_config_data_from_key_vault()
 
 async def db_connect():
-    con = pyodbc.connect(conn_str)
-    return con
+    try:
+        con = pyodbc.connect(conn_str)
+        if con:
+            return con
+        else:
+            raise
+    except Exception as e:
+        print(e)
 
 CLIENT_ID = data['CLIENT_ID']
 CLIENT_SECRET = data['CLIENT_SECRET']
