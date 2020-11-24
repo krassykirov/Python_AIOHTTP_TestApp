@@ -54,6 +54,12 @@ $('.stop').on('click',function(){
 owl.trigger('autoplay.stop.owl')
 })
 
+$('.item').click(function(e) {
+    e.preventDefault();
+    var img_to_load = $(this).find('img')[0].src,
+        imgWindow = window.open(img_to_load, 'imgWindow');
+});
+
 </script>
 
 {% endblock %}
