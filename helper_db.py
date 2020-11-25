@@ -13,7 +13,7 @@ def get_app_config_data_from_key_vault():
     headers = {'Authorization': 'Bearer {}'.format(access_token)}
     constr = requests.get(con_str, headers=headers).json()
     app_data = requests.get(app_config, headers=headers).json()
-    constr = constr.get('value')  # constr = eval('value')
+    constr = constr.get('value')  ### constr = eval('value')
     app_data = json.loads(app_data.get('value'))
     return constr, app_data
 
@@ -21,9 +21,10 @@ conn_str,data = get_app_config_data_from_key_vault()
 
 async def db_connect():
     try:
-        con = pyodbc.connect(conn_str)
-        return con
-    except pyodbc.Error as e:
-        print(e)
+        conn = pyodbc.connect(conn_str)
+        return conn
+    except pyodbc.Error as error:
+        print(error)
+        raise Exception("Unable to connect to the Database server")
 
 
