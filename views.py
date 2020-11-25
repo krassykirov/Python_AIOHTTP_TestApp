@@ -1,7 +1,7 @@
 import datetime
 from aiohttp import web
 import aiohttp_jinja2
-from azure_login import db_connect
+from helper_db import db_connect
 from auth import generate_password_hash,check_password_hash
 from aiohttp_session import get_session,new_session
 
