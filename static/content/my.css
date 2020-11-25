@@ -1,3 +1,11 @@
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+
 .navbar {
     transition: all 0.4s;
 }
@@ -15,7 +23,6 @@
 .navbar .navbar-brand {
     color: #fff;
 }
-
 
 /* Change navbar styling on scroll */
 .navbar.active {
@@ -37,7 +44,6 @@
     color: #555;
 }
 
-
 /* Change navbar styling on small viewports */
 @media (max-width: 991.98px) {
     .navbar {
@@ -49,13 +55,6 @@
     }
 }
 
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
 .text-small {
     font-size: 0.9rem !important;
 }
