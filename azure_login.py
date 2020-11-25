@@ -7,17 +7,8 @@ from aiohttp import web
 from msrestazure.azure_active_directory import AADTokenCredentials
 from aiohttp_session import get_session
 from helper_db import get_app_config_data_from_key_vault
-import pyodbc
-
 
 conn_str,data = get_app_config_data_from_key_vault()
-
-async def db_connect():
-    try:
-        con = pyodbc.connect(conn_str)
-        return con
-    except pyodbc.Error as e:
-        print(e)
 
 CLIENT_ID = data['CLIENT_ID']
 CLIENT_SECRET = data['CLIENT_SECRET']
@@ -108,7 +99,6 @@ async def authenticate_client_key(request):
     headers = {'Authorization': 'Bearer {}'.format(token)}
     r = requests.get(uri, headers=headers).json()
     users  = r['value']
-    print(users)
     return aiohttp_jinja2.render_template("azure-users.html", request, context= {'users':users})
 
 

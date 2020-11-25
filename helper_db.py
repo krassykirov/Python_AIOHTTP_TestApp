@@ -1,10 +1,14 @@
 import pyodbc,requests
 import os,json
 
+
+
 async def db_connect():
-    conn_str = get_app_config_data_from_key_vault()
-    con = pyodbc.connect(conn_str)
-    return con
+    try:
+        con = pyodbc.connect(conn_str)
+        return con
+    except pyodbc.Error as e:
+        print(e)
 
 def get_app_config_data_from_key_vault():
     msi_endpoint = os.environ.get("MSI_ENDPOINT")
