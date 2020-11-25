@@ -8,6 +8,7 @@ from msrestazure.azure_active_directory import AADTokenCredentials
 from aiohttp_session import get_session
 from helper_db import get_app_config_data_from_key_vault
 
+
 conn_str,data = get_app_config_data_from_key_vault()
 
 CLIENT_ID = data['CLIENT_ID']
