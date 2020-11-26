@@ -59,9 +59,8 @@
     font-size: 0.9rem !important;
 }
 
-
 body {
     min-height: 110vh;
     background-color: #555;
-    background-image: linear-gradient(135deg, #4ca1af 0%, #4ca1af 100%);
+    //background-image: linear-gradient(135deg, #4ca1af 0%, #4ca1af 100%);
 }
