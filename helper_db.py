@@ -24,7 +24,6 @@ async def db_connect():
         conn = pyodbc.connect(conn_str)
         return conn
     except pyodbc.Error as error:
-        print(error)
-        raise Exception("Unable to connect to the Database server")
+        raise Exception("Unable to connect to the Database server ",error)
 
 
