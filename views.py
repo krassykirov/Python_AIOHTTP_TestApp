@@ -86,8 +86,7 @@ async def list_users(request):
         return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
 
 async def sql_test(request):
-    data= await request.post()
-    print(data)
+    data = await request.post()
     try:
         async with request.app['db'].acquire() as conn:
             await conn.execute("INSERT INTO countries(country, capital) VALUES($1,$2)",
