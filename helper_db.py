@@ -2,6 +2,7 @@ import pyodbc,requests
 import os,json
 
 def get_app_config_data_from_key_vault():
+
     msi_endpoint = os.environ.get("MSI_ENDPOINT")
     msi_secret = os.environ.get("MSI_SECRET")
     token_auth_uri = f"{msi_endpoint}?resource=https://vault.azure.net&api-version=2017-09-01"

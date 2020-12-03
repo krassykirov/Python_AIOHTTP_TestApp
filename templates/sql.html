@@ -4,17 +4,29 @@
 <div align="center">
     <div class="row">
          <div class="col-md-4">
-         <div class="alert alert-success" role="alert">
-         <p>Fetching some test users data from Azure SQL</p>
+         <p>Fetching some test data from Azure SQL database</p>
                 <table>
-            {% for user in users %}
-               <tr>
-                   <th> {{ user }} </th>
-               </tr>
-            {% endfor %}
-            </table>
+                {% for k in countries %}
+                   <tr>
+                       <th> {{ k }} </th>
+                   </tr>
+                {% endfor %}
+             </table>
          </div>
-        </div>
+          <form action="/sql_test" method="POST" class="register">
+                <div class="form-group">
+                  <label for="country">country</label>
+                  <input type="text" class="form-control" id="country" placeholder="country" name="country">
+                </div>
+                   <div class="form-group">
+                  <label for="capital">capital:</label>
+                  <input type="text" class="form-control" id="capital" placeholder="capital"
+                         name="capital">
+                </div>
+                 <button type="submit" class="btn btn-info">Save</button>
+        </form>
+     </div>
+
      <div class="col-md-4">
      <h4>Azure SQL</h4>
      <p>Use Python to query a database using pyodbc</p>
@@ -23,7 +35,7 @@
       <p>Asyncpg is fast PostgreSQL Database Client Library designed specifically for PostgreSQL and Python/asyncio </p>
       <p><a class="btn btn-info" href="https://github.com/MagicStack/asyncpg" target="_blank">Learn more &raquo;</a></p>
      </div>
-     </div>
+
  {% if error %}
      <pre style="color: red">Warning: {{error}}</pre>
   {% endif %}

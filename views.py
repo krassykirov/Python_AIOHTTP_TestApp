@@ -7,6 +7,7 @@ from aiohttp_session import get_session,new_session
 
 @aiohttp_jinja2.template('index.html')
 async def home(request):
+    print(request.remote)
     return
 
 @aiohttp_jinja2.template('one.html')
@@ -78,13 +79,26 @@ async def validate_login_form(request):
 
 @aiohttp_jinja2.template('sql.html')
 async def list_users(request):
-    con = await db_connect()
-    cursor = con.cursor()
-    cursor.execute("SELECT email FROM USERS")
-    rows = str(cursor.fetchall())
-    rows = rows.replace('(', '').replace(')', '').replace('[', '').replace(']', '').replace(',', '').split()
-    users = ''.join(rows).replace("'", ' ').split()
-    return aiohttp_jinja2.render_template("sql.html", request, context={'users': users})
+    async with request.app['db'].acquire() as conn:
+        countries = await conn.fetch("SELECT country,capital FROM countries")
+        countries = list(countries)
+        print(countries)
+        return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
+
+async def sql_test(request):
+    data= await request.post()
+    print(data)
+    try:
+        async with request.app['db'].acquire() as conn:
+            await conn.execute("INSERT INTO countries(country, capital) VALUES($1,$2)",
+                               data['country'], data['capital'] )
+            countries = await conn.fetch("SELECT country,capital FROM countries")
+            countries = list(countries)
+            print(countries)
+            return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
+    except Exception as e:
+        print(e)
+        pass
 
 @aiohttp_jinja2.template('carou.html')
 async def carousel(request):
@@ -96,6 +110,15 @@ async def logout_db(request):
     session.invalidate()
     return web.HTTPFound('/')
 
+
+# async def logout_azure(request):
+#     session = await get_session(request)
+#     session.invalidate()
+#     authority_host_uri = 'https://login.microsoftonline.com'
+#     tenant = 'krassy.onmicrosoft.com'
+#     authority_uri = authority_host_uri + '/' + tenant
+#     return web.HTTPFound(authority_uri+'/oauth2/v2.0/logout?'+
+#                          "post_logout_redirect_uri=" + "https://krassy.azurewebsites.net")
 
 # https://docs.aiohttp.org/en/v0.15.3/web.html#file-uploads
 # @aiohttp_jinja2.template('function.html')
@@ -112,3 +135,13 @@ async def logout_db(request):
 #     file = filename
 #     with open(os.path.join(path, file), 'w') as f:
 #         f.write("New file created")
+
+# @aiohttp_jinja2.template('sql.html')
+# async def list_users(request):
+#     con = await db_connect()
+#     cursor = con.cursor()
+#     cursor.execute("SELECT email FROM USERS")
+#     rows = str(cursor.fetchall())
+#     rows = rows.replace('(', '').replace(')', '').replace('[', '').replace(']', '').replace(',', '').split()
+#     users = ''.join(rows).replace("'", ' ').split()
+#     return aiohttp_jinja2.render_template("sql.html", request, context={'users': users})
