@@ -7,7 +7,7 @@ def setup_routes(app):
     app.router.add_static('/static', path=os.path.join(os.getcwd(), 'static'))
     app.router.add_get("/", home, name="Home")
     app.router.add_get("/users", list_users, name="users")
-    app.router.add_post("/sql_test", sql_test)
+    app.router.add_post("/sql_test", sql_test, name="sql_test")
     app.router.add_get("/video", video, name="video") # to remove
     app.router.add_get("/login", login, name="login")
     app.router.add_get("/func", func, name="func")

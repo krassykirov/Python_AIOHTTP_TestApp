@@ -16,26 +16,25 @@
           <form action="/sql_test" method="POST" class="register">
                 <div class="form-group">
                   <label for="country">country</label>
-                  <input type="text" class="form-control" id="country" placeholder="country" name="country">
+                  <input type="text" class="form-control" id="country" placeholder="country" name="country"
+                        pattern="[A-Za-z]{2,12}" required>
                 </div>
                    <div class="form-group">
                   <label for="capital">capital:</label>
                   <input type="text" class="form-control" id="capital" placeholder="capital"
-                         name="capital">
+                         pattern="[A-Za-z]{2,12}" required name="capital">
                 </div>
                  <button type="submit" class="btn btn-info">Save</button>
         </form>
+         <div class="col-md-4">
+         <h4>Azure SQL</h4>
+         <p>Use Python to query a database using pyodbc</p>
+         <p><a class="btn btn-info" href="https://docs.microsoft.com/en-us/azure/azure-sql/database/connect-query-python?tabs=windows" target="_blank"> Learn more &raquo;</a></p>
+          <h4>Asyncpg PostgreSQL</h4>
+          <p>Asyncpg is fast PostgreSQL Database Client Library designed specifically for PostgreSQL and Python/asyncio </p>
+          <p><a class="btn btn-info" href="https://github.com/MagicStack/asyncpg" target="_blank">Learn more &raquo;</a></p>
+         </div>
      </div>
-
-     <div class="col-md-4">
-     <h4>Azure SQL</h4>
-     <p>Use Python to query a database using pyodbc</p>
-     <p><a class="btn btn-info" href="https://docs.microsoft.com/en-us/azure/azure-sql/database/connect-query-python?tabs=windows" target="_blank"> Learn more &raquo;</a></p>
-      <h4>Asyncpg PostgreSQL</h4>
-      <p>Asyncpg is fast PostgreSQL Database Client Library designed specifically for PostgreSQL and Python/asyncio </p>
-      <p><a class="btn btn-info" href="https://github.com/MagicStack/asyncpg" target="_blank">Learn more &raquo;</a></p>
-     </div>
-
  {% if error %}
      <pre style="color: red">Warning: {{error}}</pre>
   {% endif %}

@@ -79,22 +79,22 @@ async def validate_login_form(request):
 
 @aiohttp_jinja2.template('sql.html')
 async def list_users(request):
-    async with request.app['db'].acquire() as conn:
-        countries = await conn.fetch("SELECT country,capital FROM countries")
-        countries = list(countries)
-        print(countries)
-        return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
+    con = await db_connect()
+    cursor = con.cursor()
+    countries = list(cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC"))
+    print(countries)
+    return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
 
+@aiohttp_jinja2.template('sql.html')
 async def sql_test(request):
-    data = await request.post()
+    data= await request.post()
     try:
-        async with request.app['db'].acquire() as conn:
-            await conn.execute("INSERT INTO countries(country, capital) VALUES($1,$2)",
-                               data['country'], data['capital'] )
-            countries = await conn.fetch("SELECT country,capital FROM countries")
-            countries = list(countries)
-            print(countries)
-            return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
+        con = await db_connect()
+        cursor = con.cursor()
+        cursor.execute("INSERT INTO countries(Country,Capital) VALUES(?,?);", data['country'], data['capital'])
+        con.commit()
+        countries = cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC")
+        return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
     except Exception as e:
         print(e)
         pass
