@@ -1,0 +1,103 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "Name of the hosting plan to use in Azure."
+      }
+    },
+    "webSiteName": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "Name of the Azure Web app to create."
+      }
+    },
+    "skuName": {
+      "type": "string",
+      "defaultValue": "F1",
+      "allowedValues": [
+        "F1",
+        "B1",
+        "S1"
+      ],
+      "metadata": {
+        "description": "Describes plan's pricing tier and instance size. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
+      }
+    }
+  },
+  "variables": {
+    "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
+    "hostingPlanName": "[concat('AppServicePlan-', parameters('webSiteName'))]",
+    "repoURL": "https://github.com/krassykirov/py_aiohttp.git",
+    "branch": "master",
+    "linuxFxVersion": "PYTHON|3.7",
+    "appCommandLine": "python3.7 -m aiohttp.web -H 0.0.0.0 -P 8000 main:init_app"
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-08-01",
+      "kind": "linux",
+      "location": "[resourceGroup().location]",
+      "name": "[parameters('hostingPlanName')]",
+      "properties": {
+        "reserved": true
+      },
+      "sku": {
+        "name": "[parameters('skuName')]"
+      },
+      "tags": {
+        "displayName": "HostingPlan"
+      },
+      "type": "Microsoft.Web/serverfarms"
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('webSiteName')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "Resource",
+        "displayName": "Website"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+      ],
+      "properties": {
+        "name": "[parameters('webSiteName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', parameters('webSiteName'))]"
+          ],
+          "name": "web",
+          "properties": {
+            "linuxFxVersion": "[variables('linuxFxVersion')]",
+            "appCommandLine": "[variables('appCommandLine')]"
+
+          },
+          "type": "config"
+        },
+        {
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', parameters('webSiteName'))]"
+          ],
+          "name": "web",
+          "properties": {
+            "branch": "[variables('branch')]",
+            "IsManualIntegration": true,
+            "RepoUrl": "[variables('repoURL')]"
+          },
+          "type": "sourcecontrols"
+        }
+      ]
+    }
+  ]
+}
