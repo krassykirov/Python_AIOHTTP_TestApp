@@ -7,5 +7,5 @@ files = glob.glob("./*.jpg")
 for file in files:
     im = Image.open(file)
     print(file,im.size)
-    im.size(size)
-    im.save(file + ".jpg")
+    im.thumbnail((1500, 1000))
+    im.save(file + '_thumbnail'+".jpg")
