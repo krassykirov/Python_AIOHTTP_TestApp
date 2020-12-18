@@ -18,7 +18,9 @@ def get_app_config_data_from_key_vault():
     app_data = json.loads(app_data.get('value'))
     return constr, app_data
 
-conn_str,data = get_app_config_data_from_key_vault()
+#conn_str,data = get_app_config_data_from_key_vault()
+
+conn_str = "DRIVER={ODBCDriver17forSQLServer};SERVER=tcp:krassy.database.windows.net;DATABASE=krassy_db;UID=krassy;PWD=Sql194455$"
 
 async def db_connect():
     try:
