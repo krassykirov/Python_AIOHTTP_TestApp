@@ -8,8 +8,7 @@ from msrestazure.azure_active_directory import AADTokenCredentials
 from aiohttp_session import get_session
 from helper_db import get_app_config_data_from_key_vault
 
-#conn_str,data = get_app_config_data_from_key_vault()
-data={"CLIENT_ID":"8ff7301f-cb19-43d7-968d-9530f85339b7","CLIENT_SECRET":"ZVE_jyer5354AZd19SjnnAnH_qVmbQeI--","REDIRECT_URI":"https://krassy.azurewebsites.net/authorized","TENANT":"krassykirovoutlook.onmicrosoft.com"}
+conn_str,data = get_app_config_data_from_key_vault()
 
 CLIENT_ID = data['CLIENT_ID']
 CLIENT_SECRET = data['CLIENT_SECRET']
