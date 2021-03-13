@@ -9,7 +9,7 @@ def get_app_config_data_from_key_vault():
     head_msi = {'Secret': msi_secret}
     resp = requests.get(token_auth_uri, headers=head_msi)
     access_token = resp.json()['access_token']
-    con_str = "https://krassykeyvault.vault.azure.net/secrets/constr?api-version=2016-10-01"
+    con_str = "https://krassykeyvault.vault.azure.net/secrets/connstr?api-version=2016-10-01"
     app_config = "https://krassykeyvault.vault.azure.net/secrets/data?api-version=2016-10-01"
     headers = {'Authorization': 'Bearer {}'.format(access_token)}
     constr = requests.get(con_str, headers=headers).json()
