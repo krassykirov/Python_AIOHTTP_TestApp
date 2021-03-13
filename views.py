@@ -81,7 +81,7 @@ async def validate_login_form(request):
 async def list_users(request):
     con = await db_connect()
     cursor = con.cursor()
-    countries = list(cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC"))
+    countries = list(cursor.execute("SELECT TOP(10) Country,Capital FROM countries ORDER BY id DESC"))
     print(countries)
     return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
 

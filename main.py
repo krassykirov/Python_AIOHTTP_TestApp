@@ -16,7 +16,7 @@ async def init_app(argv):
 if __name__ == '__main__':
     app = init_app(None)
     try:
-        web.run_app(app)
+        web.run_app(app,host='localhost',port=8000)
     except Exception as error:
         raise error
 
