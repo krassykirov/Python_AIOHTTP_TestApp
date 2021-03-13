@@ -13,7 +13,6 @@ async def username_ctx_processor(request: web.Request) -> Dict[str, Any]:
     return {"username": username}
 
 async def init_app(argv):
-    key = open("secret.key", "rb").read()
     app = web.Application()
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(os.path.join(os.getcwd(), "templates")),
                          context_processors=[username_ctx_processor])
