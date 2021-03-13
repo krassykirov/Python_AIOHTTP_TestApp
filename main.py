@@ -7,15 +7,9 @@ from aiohttp_session import get_session,session_middleware
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
 from typing import Any, Dict
 
-async def username_ctx_processor(request: web.Request) -> Dict[str, Any]:
-    session = await get_session(request)
-    username = session.get("username")
-    return {"username": username}
-
 async def init_app(argv):
     app = web.Application()
-    aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(os.path.join(os.getcwd(), "templates")),
-                         context_processors=[username_ctx_processor])
+    aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(os.path.join(os.getcwd(), "templates")))
     setup_routes(app)
     return app
 
