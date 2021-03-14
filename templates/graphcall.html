@@ -6,18 +6,8 @@
           <div class="alert alert-success" role="alert">
         <p>Hello {{email}}, you have been authenticated with ADAL </p>
         <p>Token expiration: {{ token_exp }}, Time now: {{time}} </p>
-        <p>id_token_decoded:</p>
+        <p> Your email : {{ email }}:</p>
          </div>
-     <div>
-        <table>
-            {% for k,v in id_token_decoded.items() %}
-               <tr>
-                   <th> {{ k }}:</th>
-                   <th> {{ v }} </th>
-               </tr>
-            {% endfor %}
-         </table>
-      </div>
  </div>
 
      <img src="/static/images/authworkflow.png" alt="Microsoft Graph" width=550 height=400/>
