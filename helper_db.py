@@ -15,7 +15,8 @@ def get_app_config_data_from_key_vault():
     constr = requests.get(con_str, headers=headers).json()
     app_data = requests.get(app_config, headers=headers).json()
     constr = constr.get('value')  ### constr = eval('value')
-    app_data = json.loads(app_data.get('value'))
+    app_data = app_data.get('value')
+    app_data = json.loads(app_data)
     return constr, app_data
 
 conn_str,data = get_app_config_data_from_key_vault()

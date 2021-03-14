@@ -86,7 +86,7 @@ async def list_users(request):
     return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
 
 @aiohttp_jinja2.template('sql.html')
-async def countries(request):
+async def users(request):
     data= await request.post()
     try:
         con = await db_connect()
