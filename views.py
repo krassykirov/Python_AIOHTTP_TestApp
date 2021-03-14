@@ -92,8 +92,8 @@ async def users(request):
         cursor = con.cursor()
         cursor.execute("INSERT INTO countries(Country,Capital) VALUES(?,?);", data['country'], data['capital'])
         con.commit()
-        # countries = cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC")
-        return aiohttp_jinja2.render_template("sql.html", request,context={})
+        countries = cursor.execute("SELECT Country,Capital FROM countries ORDER BY Country")
+        return aiohttp_jinja2.render_template("sql.html", request,context={countries})
     except Exception as e:
         return web.HTTPFound('/users')
         pass
