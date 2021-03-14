@@ -81,8 +81,7 @@ async def validate_login_form(request):
 async def list_users(request):
     con = await db_connect()
     cursor = con.cursor()
-    countries = list(cursor.execute("SELECT TOP(10) Country,Capital FROM countries ORDER BY id DESC"))
-    print(countries)
+    countries = list(cursor.execute("SELECT Country,Capital FROM countries ORDER BY Country"))
     return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
 
 @aiohttp_jinja2.template('sql.html')
@@ -93,8 +92,8 @@ async def users(request):
         cursor = con.cursor()
         cursor.execute("INSERT INTO countries(Country,Capital) VALUES(?,?);", data['country'], data['capital'])
         con.commit()
-        countries = cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC")
-        return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
+        # countries = cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC")
+        return aiohttp_jinja2.render_template("sql.html", request,context={})
     except Exception as e:
         return web.HTTPFound('/users')
         pass
