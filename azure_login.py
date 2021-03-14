@@ -26,7 +26,6 @@ keys = json.loads(keys_raw)
 
 async def login(request):
     session = await get_session(request)
-    print("Session when Login:",session)
     try:
         auth_state = str(uuid.uuid4())
         print('auth_state',auth_state)
