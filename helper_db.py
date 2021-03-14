@@ -2,29 +2,20 @@ import pyodbc,requests
 import os,json
 
 def get_app_config_data_from_key_vault():
-    token_endpoint = "https://login.microsoftonline.com/krassykirovoutlook.onmicrosoft.com/oauth2/v2.0/token"
-    data = {
-        'grant_type': 'client_credentials',
-        'client_id': '8ff7301f-cb19-43d7-968d-9530f85339b7',
-        'client_secret': "ZVE_jyer5354AZd19SjnnAnH_qVmbQeI--",
-        'scope': 'https://vault.azure.net/.default'
-    }
-    # VAULT_URL must be in the format 'https://<vaultname>.vault.azure.net'
-    uri = "https://krassykeyvault.vault.azure.net/secrets/connstr?api-version=2016-10-01"
-    uri2 = "https://krassykeyvault.vault.azure.net/secrets/data?api-version=2016-10-01"
-    r = requests.post(token_endpoint, data=data)
-    token = r.json().get('access_token')
-    headers = {'Authorization': 'Bearer {}'.format(token)}
 
-    constr = requests.get(uri, headers=headers).json()
-
-    app_data = requests.get(uri2, headers=headers).json()
-    print(type(app_data), app_data)
-    constr = constr.get('value')  # str_to_dict => d1 = eval('string_value')
-    app_data = app_data.get('value')
-    print(type(app_data), app_data)
-    app_data = json.loads(app_data)
-    print(type(app_data), app_data)
+    msi_endpoint = os.environ.get("MSI_ENDPOINT")
+    msi_secret = os.environ.get("MSI_SECRET")
+    token_auth_uri = f"{msi_endpoint}?resource=https://vault.azure.net&api-version=2017-09-01"
+    head_msi = {'Secret': msi_secret}
+    resp = requests.get(token_auth_uri, headers=head_msi)
+    access_token = resp.json()['access_token']
+    con_str = "https://krassykeyvault.vault.azure.net/secrets/connstr?api-version=2016-10-01"
+    app_config = "https://krassykeyvault.vault.azure.net/secrets/data?api-version=2016-10-01"
+    headers = {'Authorization': 'Bearer {}'.format(access_token)}
+    constr = requests.get(con_str, headers=headers).json()
+    app_data = requests.get(app_config, headers=headers).json()
+    constr = constr.get('value')  ### constr = eval('value')
+    app_data = json.loads(app_data.get('value'))
     return constr, app_data
 
 conn_str,data = get_app_config_data_from_key_vault()
