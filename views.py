@@ -96,7 +96,7 @@ async def sql_test(request):
         countries = cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC")
         return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
     except Exception as e:
-        print(e)
+        return web.HTTPFound('/')
         pass
 
 @aiohttp_jinja2.template('carou.html')
