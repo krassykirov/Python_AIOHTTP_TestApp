@@ -86,7 +86,7 @@ async def list_users(request):
     return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
 
 @aiohttp_jinja2.template('sql.html')
-async def sql_test(request):
+async def countries(request):
     data= await request.post()
     try:
         con = await db_connect()
@@ -96,7 +96,7 @@ async def sql_test(request):
         countries = cursor.execute("SELECT TOP(5) Country,Capital FROM countries ORDER BY id DESC")
         return aiohttp_jinja2.render_template("sql.html", request, context={'countries': countries})
     except Exception as e:
-        return web.HTTPFound('/')
+        return web.HTTPFound('/users')
         pass
 
 @aiohttp_jinja2.template('carou.html')
