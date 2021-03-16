@@ -65,13 +65,14 @@ async def authorized(request):
         session['last_visit'] = str(datetime.datetime.now())
         session['email'] = id_token_decoded['email']
         expires_in = datetime.datetime.now() + datetime.timedelta(seconds=token_response.get('expires_in', 3599))
+        expires_in = expires_in.strftime("%m/%d/%Y, %H:%M:%S")
         session['expires_in'] = str(expires_in)
         session['username'] = id_token_decoded['email']
         session['last_visit'] = str(datetime.datetime.now())
         with open('token.txt','a') as file:
             file.write(str(session)+'\n')
-        context = {"id_token" : id_token, "id_token_decoded" : id_token_decoded,'token_exp': expires_in,'email':id_token_decoded['email'],
-                   'time' : datetime.datetime.now(),'username':session['username']}
+        context = {"id_token" : id_token, "id_token_decoded" : id_token_decoded,'token_exp': expires_in,'email':email,
+                   'email2':id_token_decoded['email'],'time' : datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),'username':session['username']}
         return aiohttp_jinja2.render_template("graphcall.html", request, context=context)
 
     except Exception as error:
