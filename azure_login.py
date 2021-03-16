@@ -70,7 +70,7 @@ async def authorized(request):
         session['last_visit'] = str(datetime.datetime.now())
         with open('token.txt','a') as file:
             file.write(str(session)+'\n')
-        context = {"id_token" : id_token, "id_token_decoded" : id_token_decoded,'token_exp': expires_in,'email':email,
+        context = {"id_token" : id_token, "id_token_decoded" : id_token_decoded,'token_exp': expires_in,'email':id_token_decoded['email'],
                    'time' : datetime.datetime.now(),'username':session['username']}
         return aiohttp_jinja2.render_template("graphcall.html", request, context=context)
 
