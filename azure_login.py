@@ -20,7 +20,7 @@ TOKEN_ENDPOINT = '/oauth2/v2.0/token'
 RESOURCE = 'https://graph.microsoft.com/'
 API_VERSION = 'beta'
 SCOPES = ['User.ReadAll','openid','profile','email']
-keys_url = f'https://login.microsoftonline.com/krassykirovoutlook.onmicrosoft.com/discovery/keys'
+keys_url = f'https://login.microsoftonline.com/{TENANT}/discovery/keys'
 keys_raw = requests.get(keys_url).text
 keys = json.loads(keys_raw)
 
