@@ -20,8 +20,6 @@ def get_app_config_data_from_key_vault():
 
 conn_str,data = get_app_config_data_from_key_vault()
 
-conn_str,data = get_app_config_data_from_key_vault()
-
 async def db_connect():
     try:
         conn = pyodbc.connect(conn_str)
