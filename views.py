@@ -116,7 +116,7 @@ async def logout_db(request):
 #     authority_uri = authority_host_uri + '/' + tenant
 #     return web.HTTPFound(authority_uri+'/oauth2/v2.0/logout?'+
 #                          "post_logout_redirect_uri=" + "https://krassy.azurewebsites.net")
-
+#
 # https://docs.aiohttp.org/en/v0.15.3/web.html#file-uploads
 # @aiohttp_jinja2.template('function.html')
 # async def upload(request):
