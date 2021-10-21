@@ -14,9 +14,9 @@ async def home(request):
 async def one(request):
     return
 
-@aiohttp_jinja2.template('video.html')
-async def video(request):
-    return
+# @aiohttp_jinja2.template('video.html')
+# async def video(request):
+#     return
 
 @aiohttp_jinja2.template('register.html')
 async def render_register(request):
@@ -97,9 +97,9 @@ async def users(request):
         return web.HTTPFound('/users')
         pass
 
-@aiohttp_jinja2.template('carou.html')
-async def carousel(request):
-    return
+# @aiohttp_jinja2.template('carou.html')
+# async def carousel(request):
+#     return
 
 async def logout_db(request):
     session = await get_session(request)
